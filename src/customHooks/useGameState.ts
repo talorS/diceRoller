@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { PLAYERS_SIZE, DICES_SIZE, DEFAULT_WINNING_SCORE, INTERVAL_DURATION, ROLL_DURATION } from "../helper/constants";
-import { initArray, randomDiceValue } from "../helper/utilits";
+import { randomDiceValue } from "../helper/utilits";
 
 export const useGameState = () => {
-    const [scores, setScores] = useState<number[]>(() => initArray(PLAYERS_SIZE, 0));
+    const [scores, setScores] = useState<number[]>(Array(PLAYERS_SIZE).fill(0));
     const [currentScore, setCurrentScore] = useState<number>(0);
     const [activePlayer, setActivePlayer] = useState<number>(0);
-    const [diceValues, setDiceValues] = useState<number[]>(() => initArray(DICES_SIZE, 1));
+    const [diceValues, setDiceValues] = useState<number[]>(Array(DICES_SIZE).fill(1));
     const [winningScore, setWinningScore] = useState<number>(DEFAULT_WINNING_SCORE);
     const [isRolling, setIsRolling] = useState<boolean>(false);
     const [gameOver, setGameOver] = useState<boolean>(false);
-    const [wins, setWins] = useState<number[]>(() => initArray(PLAYERS_SIZE, 0));
+    const [wins, setWins] = useState<number[]>(Array(PLAYERS_SIZE).fill(0));
     const [doubleSixMessage, setDoubleSixMessage] = useState<string | null>(null);
 
     const resetGame = () => {
-        setScores(initArray(PLAYERS_SIZE, 0));
+        setScores(Array(PLAYERS_SIZE).fill(0));
         setCurrentScore(0);
         setActivePlayer(0);
-        setDiceValues(initArray(DICES_SIZE, 1));
+        setDiceValues(Array(DICES_SIZE).fill(1));
         setGameOver(false);
         setIsRolling(false);
         setDoubleSixMessage(null);
@@ -78,7 +78,7 @@ export const useGameState = () => {
         }
     };
 
-    const updateWinningScore = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleUpdateWinningScore = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const newScore = Number(event.target.value) || DEFAULT_WINNING_SCORE;
         setWinningScore(newScore);
     };
@@ -97,6 +97,6 @@ export const useGameState = () => {
         switchPlayer,
         rollDice,
         holdScore,
-        updateWinningScore,
+        handleUpdateWinningScore,
     };
 };

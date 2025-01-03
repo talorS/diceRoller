@@ -8,7 +8,7 @@ type GameControlsProps = {
     onRoll: () => void;
     onHold: () => void;
     onNewGame: () => void;
-    onUpdateWinningScore: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleUpdateWinningScore: (event: React.ChangeEvent<HTMLInputElement>) => void;
     winningScore: number;
     gameOver: boolean;
     isRolling: boolean;
@@ -18,7 +18,7 @@ const GameControls = ({
     onRoll,
     onHold,
     onNewGame,
-    onUpdateWinningScore,
+    handleUpdateWinningScore,
     winningScore,
     gameOver,
     isRolling,
@@ -29,7 +29,7 @@ const GameControls = ({
                 Winning Score:
                 <Input
                     winningScore={winningScore}
-                    onUpdateWinningScore={onUpdateWinningScore}
+                    onUpdateWinningScore={handleUpdateWinningScore}
                     gameOver={gameOver}
                 />
             </label>

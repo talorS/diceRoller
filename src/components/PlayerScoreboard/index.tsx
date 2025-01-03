@@ -5,8 +5,9 @@ type PlayerScoreboardProps = {
     activePlayer: number;
     gameOver: boolean;
     winningScore: number;
+    wins: number[];
 }
-const PlayerScoreboard = ({ scores, activePlayer, gameOver, winningScore }: PlayerScoreboardProps) => {
+const PlayerScoreboard = ({ scores, activePlayer, gameOver, winningScore, wins }: PlayerScoreboardProps) => {
     return (
         <div className="scoreboard">
             {scores.map((score, index) => (
@@ -16,6 +17,7 @@ const PlayerScoreboard = ({ scores, activePlayer, gameOver, winningScore }: Play
                 >
                     Player {index + 1}: {score}{' '}
                     {gameOver && score >= winningScore && '(Winner!)'}
+                    <div>Wins: {wins[index]}</div>
                 </div>
             ))}
         </div>

@@ -1,14 +1,20 @@
 .scoreboard {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 100%;
     margin-bottom: 20px;
 }
 
 .player {
     flex: 1;
-    text-align: center;
+    text-align: left;
     font-size: 18px;
     font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 10px;
+    background-color: lightsteelblue;
 }
 
 .player.active {

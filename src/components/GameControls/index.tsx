@@ -30,7 +30,7 @@ const GameControls = ({
                 disabled={gameOver}
                 className="winning-score-input"
             />
-            <RollButton isRolling={isRolling} onRoll={rollDice} />
+            <RollButton gameOver={gameOver} isRolling={isRolling} onRoll={rollDice} />
             <button onClick={holdScore} disabled={gameOver} className="hold-button">
                 Hold
             </button>

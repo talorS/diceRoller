@@ -2,8 +2,10 @@ import { useState } from "react";
 import DiceContainer from "../DiceContainer";
 import GameControls from "../GameControls";
 import PlayerScoreboard from "../PlayerScoreboard";
-import './Game.css'
 import { randomDiceValue } from "../../helper/lib";
+import { useThemeContext } from "../../customHooks/ThemeContext";
+import Toggle from "../Toggle";
+import './Game.css'
 
 const rollDuration = 1000;
 const intervalDuration = 100;
@@ -21,8 +23,10 @@ const Game = () => {
     const [winningScore, setWinningScore] = useState(100); // Default winning score
     const [isRolling, setIsRolling] = useState(false);
     const [gameOver, setGameOver] = useState(false);
+    const [wins, setWins] = useState(() => initPlayers(playersSize));
+    const [doubleSixMessage, setDoubleSixMessage] = useState<string | null>(null);
 
-    console.log(currentScore)
+    const { theme, toggleTheme } = useThemeContext();
 
     const initNewGame = () => {
         setScores([0, 0]);
@@ -30,41 +34,50 @@ const Game = () => {
         setActivePlayer(0);
         setDiceValues([1, 1]);
         setGameOver(false);
+        setIsRolling(false);
     };
 
     const rollDice = () => {
         if (gameOver || isRolling) return;
         setIsRolling(true);
 
-        const roll = () => {
-            const newValues = Array.from({ length: diceValues.length }, randomDiceValue);
-            setDiceValues(newValues);
-        };
+        const interval = setInterval(() => {
+            setDiceValues(prevValues => prevValues.map(randomDiceValue));
+        }, intervalDuration);
 
-        const interval = setInterval(roll, intervalDuration);
         setTimeout(() => {
             clearInterval(interval);
+
             const finalDiceValues = Array.from({ length: diceValues.length }, randomDiceValue);
             setDiceValues(finalDiceValues);
             setIsRolling(false);
+
             if (finalDiceValues.every(val => val === 6)) {
-                // Double six: reset round score
-                setCurrentScore(0);
-                switchPlayer();
+                setDoubleSixMessage('You rolled double six! Switching player...');
+                setTimeout(() => {
+                    setDoubleSixMessage(null);
+                    setCurrentScore(0);
+                    switchPlayer();
+                }, rollDuration);
             } else {
-                setCurrentScore((prevScore) => prevScore + finalDiceValues[0] + finalDiceValues[1]);
+                const totalScore = finalDiceValues.reduce((acc, val) => acc + val, 0);
+                setCurrentScore(prevScore => prevScore + totalScore);
             }
         }, rollDuration);
     };
 
     const holdScore = () => {
-        if (gameOver) return;
+        const shouldHold = gameOver || isRolling || doubleSixMessage;
+        if (shouldHold) return;
 
         const updatedScores = [...scores];
         updatedScores[activePlayer] += currentScore;
         setScores(updatedScores);
 
         if (updatedScores[activePlayer] >= winningScore) {
+            const updatedWins = [...wins];
+            updatedWins[activePlayer] += 1;
+            setWins(updatedWins);
             setGameOver(true);
         } else {
             setCurrentScore(0);
@@ -82,11 +95,13 @@ const Game = () => {
 
     return (
         <div className="game">
+            <Toggle theme={theme} onToggle={toggleTheme} />
             <PlayerScoreboard
                 scores={scores}
                 activePlayer={activePlayer}
                 gameOver={gameOver}
                 winningScore={winningScore}
+                wins={wins}
             />
             <GameControls
                 rollDice={rollDice}
@@ -98,6 +113,7 @@ const Game = () => {
                 isRolling={isRolling}
             />
             <DiceContainer diceValues={diceValues} />
+            {doubleSixMessage && <div className="double-six-message">{doubleSixMessage}</div>}
             {gameOver && <div className="game-over">Game Over! Player {activePlayer + 1} Wins!</div>}
         </div>
     );

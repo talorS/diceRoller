@@ -1,0 +1,23 @@
+.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.theme-toggle-button {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.light .theme-toggle-button {
+    background-color: #333333;
+    color: #ffffff;
+    ;
+}

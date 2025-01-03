@@ -23,7 +23,6 @@ const Game: React.FC = () => {
 
     const { theme, toggleTheme } = useThemeContext();
 
-    // Game actions
     const resetGame = (): void => {
         setScores(initArray(PLAYERS_SIZE, 0));
         setCurrentScore(0);

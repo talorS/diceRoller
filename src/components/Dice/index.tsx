@@ -1,3 +1,4 @@
+import Pip from '../Pip';
 import './Dice.css';
 
 type DiceProps = {
@@ -5,7 +6,8 @@ type DiceProps = {
 };
 
 const Dice = ({ value }: DiceProps) => {
-    return <div className="dice">{value}</div>;
+    const getPips = () => Array.from({ length: value }, (_, i) => <Pip key={i} />);
+    return <div className={`dice dice-${value}`}>{getPips()}</div>;
 };
 
 export default Dice;

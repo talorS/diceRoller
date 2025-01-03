@@ -1,13 +1,119 @@
 .dice {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    color: black;
-    font-size: 20px;
-    font-weight: bold;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border: 2px solid #333;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Center */
+.dice-1 .pip:nth-child(1) {
+    grid-area: 2 / 2;
+}
+
+/* Top-left */
+.dice-2 .pip:nth-child(1) {
+    grid-area: 1 / 1;
+}
+
+/* Bottom-right */
+.dice-2 .pip:nth-child(2) {
+    grid-area: 3 / 3;
+}
+
+/* Top-left */
+.dice-3 .pip:nth-child(1) {
+    grid-area: 1 / 1;
+}
+
+/* Center */
+.dice-3 .pip:nth-child(2) {
+    grid-area: 2 / 2;
+}
+
+/* Bottom-right */
+.dice-3 .pip:nth-child(3) {
+    grid-area: 3 / 3;
+}
+
+/* Top-left */
+.dice-4 .pip:nth-child(1) {
+    grid-area: 1 / 1;
+}
+
+/* Top-right */
+.dice-4 .pip:nth-child(2) {
+    grid-area: 1 / 3;
+}
+
+/* Bottom-left */
+.dice-4 .pip:nth-child(3) {
+    grid-area: 3 / 1;
+}
+
+/* Bottom-right */
+.dice-4 .pip:nth-child(4) {
+    grid-area: 3 / 3;
+}
+
+/* Top-left */
+.dice-5 .pip:nth-child(1) {
+    grid-area: 1 / 1;
+}
+
+/* Top-right */
+.dice-5 .pip:nth-child(2) {
+    grid-area: 1 / 3;
+}
+
+/* Center */
+.dice-5 .pip:nth-child(3) {
+    grid-area: 2 / 2;
+}
+
+/* Bottom-left */
+.dice-5 .pip:nth-child(4) {
+    grid-area: 3 / 1;
+}
+
+/* Bottom-right */
+.dice-5 .pip:nth-child(5) {
+    grid-area: 3 / 3;
+}
+
+/* Top-left */
+.dice-6 .pip:nth-child(1) {
+    grid-area: 1 / 1;
+}
+
+/* Top-right */
+.dice-6 .pip:nth-child(2) {
+    grid-area: 1 / 3;
+}
+
+/* Middle-left */
+.dice-6 .pip:nth-child(3) {
+    grid-area: 2 / 1;
+}
+
+/* Middle-right */
+.dice-6 .pip:nth-child(4) {
+    grid-area: 2 / 3;
+}
+
+/* Bottom-left */
+.dice-6 .pip:nth-child(5) {
+    grid-area: 3 / 1;
+}
+
+/* Bottom-right */
+.dice-6 .pip:nth-child(6) {
+    grid-area: 3 / 3;
 }

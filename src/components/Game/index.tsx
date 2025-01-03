@@ -32,8 +32,6 @@ const Game = () => {
             <PlayerScoreboard
                 scores={scores}
                 activePlayer={activePlayer}
-                gameOver={gameOver}
-                winningScore={winningScore}
                 wins={wins}
             />
             <GameControls

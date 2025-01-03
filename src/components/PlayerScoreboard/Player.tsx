@@ -1,18 +1,15 @@
 type PlayerProps = {
     score: number;
     activePlayer: number;
-    winningScore: number;
-    gameOver: boolean;
     winsNum: number;
-    index: number
+    currPlayer: number
 }
-const Player = ({ score, activePlayer, gameOver, winsNum, winningScore, index }: PlayerProps) => {
+const Player = ({ score, activePlayer, winsNum, currPlayer }: PlayerProps) => {
     return (
         <div
-            className={`player ${activePlayer === index ? 'active' : ''}`}
+            className={`player ${activePlayer === currPlayer ? 'active' : ''}`}
         >
-            Player {index + 1}: {score}{' '}
-            {gameOver && score >= winningScore && '(Winner!)'}
+            <div>Player {currPlayer + 1}: {score}</div>
             <div>Wins: {winsNum}</div>
         </div>
     );

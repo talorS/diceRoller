@@ -20,41 +20,47 @@ export const useGameState = () => {
         setDiceValues(initArray(DICES_SIZE, 1));
         setGameOver(false);
         setIsRolling(false);
+        setDoubleSixMessage(null);
     };
 
-    const switchPlayer = (): void => {
-        setActivePlayer((prevPlayer) => (prevPlayer === 0 ? 1 : 0));
+    const switchPlayer = () => {
+        setActivePlayer((prevPlayer) => 1 - prevPlayer);
     };
 
-    const rollDice = (): void => {
+    const rollDice = () => {
         if (gameOver || isRolling) return;
 
         setIsRolling(true);
+
         const interval = setInterval(() => {
-            setDiceValues((prevValues) => prevValues.map(randomDiceValue));
+            setDiceValues(diceValues.map(() => randomDiceValue()));
         }, INTERVAL_DURATION);
 
         setTimeout(() => {
             clearInterval(interval);
-            const finalDiceValues = Array.from({ length: diceValues.length }, randomDiceValue);
-            setDiceValues(finalDiceValues);
+            const finalValues = diceValues.map(() => randomDiceValue());
+            setDiceValues(finalValues);
             setIsRolling(false);
 
-            if (finalDiceValues.every((val) => val === 6)) {
-                setDoubleSixMessage("You rolled double six! Switching player...");
-                setTimeout(() => {
-                    setDoubleSixMessage(null);
-                    setCurrentScore(0);
-                    switchPlayer();
-                }, ROLL_DURATION);
+            if (finalValues.every((value) => value === 6)) {
+                handleDoubleSix();
             } else {
-                const totalScore = finalDiceValues.reduce((acc, val) => acc + val, 0);
-                setCurrentScore((prevScore) => prevScore + totalScore);
+                const totalScore = finalValues.reduce((sum, val) => sum + val, 0);
+                setCurrentScore((prev) => prev + totalScore);
             }
         }, ROLL_DURATION);
     };
 
-    const holdScore = (): void => {
+    const handleDoubleSix = () => {
+        setDoubleSixMessage("You rolled double six! Switching player...");
+        setTimeout(() => {
+            setDoubleSixMessage(null);
+            setCurrentScore(0);
+            switchPlayer();
+        }, ROLL_DURATION);
+    };
+
+    const holdScore = () => {
         if (gameOver || isRolling || doubleSixMessage) return;
 
         const updatedScores = [...scores];

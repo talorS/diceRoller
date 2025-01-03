@@ -1,3 +1,5 @@
+import './Player.css'
+
 type PlayerProps = {
     score: number;
     activePlayer: number;

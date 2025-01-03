@@ -9,7 +9,8 @@ const Player = ({ score, activePlayer, winsNum, currPlayer }: PlayerProps) => {
         <div
             className={`player ${activePlayer === currPlayer ? 'active' : ''}`}
         >
-            <div>Player {currPlayer + 1}: {score}</div>
+            <div>Player: {currPlayer + 1}</div>
+            <div>Score: {score}</div>
             <div>Wins: {winsNum}</div>
         </div>
     );

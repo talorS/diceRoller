@@ -2,18 +2,18 @@ import './Player.css'
 
 type PlayerProps = {
     score: number;
-    activePlayer: number;
-    winsNum: number;
+    isActive: boolean;
+    wins: number;
     currPlayer: number
 }
-const PlayerCard = ({ score, activePlayer, winsNum, currPlayer }: PlayerProps) => {
+const PlayerCard = ({ score, isActive, wins, currPlayer }: PlayerProps) => {
     return (
         <div
-            className={`player ${activePlayer === currPlayer ? 'active' : ''}`}
+            className={`player ${isActive ? 'active' : ''}`}
         >
             <div>Player: {currPlayer + 1}</div>
             <div>Score: {score}</div>
-            <div>Wins: {winsNum}</div>
+            <div>Wins: {wins}</div>
         </div>
     );
 };

@@ -10,10 +10,11 @@ const PlayerScoreboard = ({ scores, activePlayer, wins }: PlayerScoreboardProps)
     return (
         <div className="scoreboard">
             {scores.map((score, index) => (
-                <PlayerCard key={index}
+                <PlayerCard
+                    key={index}
                     score={score}
-                    activePlayer={activePlayer}
-                    winsNum={wins[index]}
+                    isActive={activePlayer === index}
+                    wins={wins[index]}
                     currPlayer={index}
                 />
             ))}

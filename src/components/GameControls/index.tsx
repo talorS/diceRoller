@@ -34,7 +34,7 @@ const GameControls = ({
                 />
             </label>
             <RollButton gameOver={gameOver} isRolling={isRolling} onRoll={onRoll} />
-            <HoldButton gameOver={gameOver} onHold={onHold} />
+            <HoldButton disabled={gameOver || isRolling} onHold={onHold} />
             <NewGameButton onNewGame={onNewGame} />
         </div>
     );

@@ -3,14 +3,14 @@ import './HoldButton.css';
 
 type HoldButtonProps = {
     onHold: () => void;
-    gameOver: boolean;
+    disabled: boolean;
 };
 
-const HoldButton = ({ onHold, gameOver }: HoldButtonProps) => {
+const HoldButton = ({ onHold, disabled }: HoldButtonProps) => {
     return (
         <Button
             onClick={onHold}
-            disabled={gameOver}
+            disabled={disabled}
             className="hold-button"
         >
             Hold

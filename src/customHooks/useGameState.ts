@@ -13,7 +13,7 @@ export const useGameState = () => {
     const [wins, setWins] = useState<number[]>(() => initArray(PLAYERS_SIZE, 0));
     const [doubleSixMessage, setDoubleSixMessage] = useState<string | null>(null);
 
-    const resetGame = (): void => {
+    const resetGame = () => {
         setScores(initArray(PLAYERS_SIZE, 0));
         setCurrentScore(0);
         setActivePlayer(0);
@@ -28,24 +28,24 @@ export const useGameState = () => {
     };
 
     const rollDice = () => {
-        if (gameOver || isRolling) return;
+        if (gameOver || isRolling || doubleSixMessage) return;
 
         setIsRolling(true);
 
         const interval = setInterval(() => {
-            setDiceValues(diceValues.map(() => randomDiceValue()));
+            setDiceValues((prevValues) => prevValues.map(randomDiceValue));
         }, INTERVAL_DURATION);
 
         setTimeout(() => {
             clearInterval(interval);
-            const finalValues = diceValues.map(() => randomDiceValue());
-            setDiceValues(finalValues);
+            const finalDiceValues = Array.from({ length: DICES_SIZE }, randomDiceValue);
+            setDiceValues(finalDiceValues);
             setIsRolling(false);
 
-            if (finalValues.every((value) => value === 6)) {
+            if (finalDiceValues.every((value) => value === 6)) {
                 handleDoubleSix();
             } else {
-                const totalScore = finalValues.reduce((sum, val) => sum + val, 0);
+                const totalScore = finalDiceValues.reduce((sum, val) => sum + val, 0);
                 setCurrentScore((prev) => prev + totalScore);
             }
         }, ROLL_DURATION);
@@ -79,7 +79,8 @@ export const useGameState = () => {
     };
 
     const updateWinningScore = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setWinningScore(Number(event.target.value) || DEFAULT_WINNING_SCORE);
+        const newScore = Number(event.target.value) || DEFAULT_WINNING_SCORE;
+        setWinningScore(newScore);
     };
 
     return {

@@ -6,6 +6,8 @@ import { randomDiceValue } from "../../helper/lib";
 import { useThemeContext } from "../../customHooks/ThemeContext";
 import Toggle from "../Toggle";
 import './Game.css'
+import GameOverDisplay from "./GameOverDisplay";
+import MessageDisplay from "./MessageDisplay";
 
 const rollDuration = 1000;
 const intervalDuration = 100;
@@ -113,8 +115,8 @@ const Game = () => {
                 isRolling={isRolling}
             />
             <DiceContainer diceValues={diceValues} />
-            {doubleSixMessage && <div className="double-six-message">{doubleSixMessage}</div>}
-            {gameOver && <div className="game-over">Game Over! Player {activePlayer + 1} Wins!</div>}
+            {doubleSixMessage && <MessageDisplay message={doubleSixMessage} />}
+            {gameOver && <GameOverDisplay winner={activePlayer + 1} />}
         </div>
     );
 };

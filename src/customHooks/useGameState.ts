@@ -42,7 +42,8 @@ export const useGameState = () => {
             setDiceValues(finalDiceValues);
             setIsRolling(false);
 
-            if (finalDiceValues.every((value) => value === 6)) {
+            const isDoubleSix = finalDiceValues.every((value) => value === 6);
+            if (isDoubleSix) {
                 handleDoubleSix();
             } else {
                 const totalScore = finalDiceValues.reduce((sum, val) => sum + val, 0);
@@ -52,7 +53,7 @@ export const useGameState = () => {
     };
 
     const handleDoubleSix = () => {
-        setDoubleSixMessage("You rolled double six! Switching player...");
+        setDoubleSixMessage("You rolled double six! Round score lost!");
         setTimeout(() => {
             setDoubleSixMessage(null);
             setCurrentScore(0);

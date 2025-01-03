@@ -1,42 +1,41 @@
-import RollButton from '../RollButton';
+import HoldButton from '../Button/HoldButton';
+import Input from '../Button/Input';
+import NewGameButton from '../Button/NewGameButton';
+import RollButton from '../Button/RollButton';
 import './GameControls.css'
 
 type GameControlsProps = {
-    rollDice: () => void;
-    holdScore: () => void;
-    initializeNewGame: () => void;
-    updateWinningScore: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onRoll: () => void;
+    onHold: () => void;
+    onNewGame: () => void;
+    onUpdateWinningScore: (event: React.ChangeEvent<HTMLInputElement>) => void;
     winningScore: number;
     gameOver: boolean;
     isRolling: boolean;
 }
 
 const GameControls = ({
-    rollDice,
-    holdScore,
-    initializeNewGame,
-    updateWinningScore,
+    onRoll,
+    onHold,
+    onNewGame,
+    onUpdateWinningScore,
     winningScore,
     gameOver,
     isRolling,
 }: GameControlsProps) => {
     return (
         <div className="controls">
-            <input
-                type="number"
-                value={winningScore}
-                onChange={updateWinningScore}
-                placeholder="Winning Score"
-                disabled={gameOver}
-                className="winning-score-input"
-            />
-            <RollButton gameOver={gameOver} isRolling={isRolling} onRoll={rollDice} />
-            <button onClick={holdScore} disabled={gameOver} className="hold-button">
-                Hold
-            </button>
-            <button onClick={initializeNewGame} className="new-game-button">
-                New Game
-            </button>
+            <label>
+                Winning Score:
+                <Input
+                    winningScore={winningScore}
+                    onUpdateWinningScore={onUpdateWinningScore}
+                    gameOver={gameOver}
+                />
+            </label>
+            <RollButton gameOver={gameOver} isRolling={isRolling} onRoll={onRoll} />
+            <HoldButton gameOver={gameOver} onHold={onHold} />
+            <NewGameButton onNewGame={onNewGame} />
         </div>
     );
 };

@@ -4,35 +4,3 @@
     gap: 10px;
     margin-bottom: 20px;
 }
-
-.winning-score-input {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.roll-button,
-.hold-button,
-.new-game-button {
-    padding: 10px 15px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.roll-button:disabled,
-.hold-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-.roll-button:hover:not(:disabled),
-.hold-button:hover:not(:disabled),
-.new-game-button:hover {
-    background-color: #0056b3;
-}

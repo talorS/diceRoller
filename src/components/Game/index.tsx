@@ -13,6 +13,7 @@ const rollDuration = 1000;
 const intervalDuration = 100;
 const dicesSize = 2;
 const playersSize = 2;
+const DEFAULT_WINNING_SCORE = 100;
 
 const initDiceValues = (size: number) => Array(size).fill(1);
 const initPlayers = (size: number) => Array(size).fill(0);
@@ -22,7 +23,7 @@ const Game = () => {
     const [currentScore, setCurrentScore] = useState(0);
     const [activePlayer, setActivePlayer] = useState(0); // 0 for Player 1, 1 for Player 2
     const [diceValues, setDiceValues] = useState<number[]>(() => initDiceValues(dicesSize));
-    const [winningScore, setWinningScore] = useState(100); // Default winning score
+    const [winningScore, setWinningScore] = useState(DEFAULT_WINNING_SCORE);
     const [isRolling, setIsRolling] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [wins, setWins] = useState(() => initPlayers(playersSize));
@@ -30,7 +31,7 @@ const Game = () => {
 
     const { theme, toggleTheme } = useThemeContext();
 
-    const initNewGame = () => {
+    const resetGame = () => {
         setScores(initPlayers(playersSize));
         setCurrentScore(0);
         setActivePlayer(0);
@@ -106,10 +107,10 @@ const Game = () => {
                 wins={wins}
             />
             <GameControls
-                rollDice={rollDice}
-                holdScore={holdScore}
-                initializeNewGame={initNewGame}
-                updateWinningScore={updateWinningScore}
+                onRoll={rollDice}
+                onHold={holdScore}
+                onNewGame={resetGame}
+                onUpdateWinningScore={updateWinningScore}
                 winningScore={winningScore}
                 gameOver={gameOver}
                 isRolling={isRolling}

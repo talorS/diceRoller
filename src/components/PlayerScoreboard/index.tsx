@@ -1,3 +1,4 @@
+import Player from './Player';
 import './PlayerScoreboard.css'
 
 type PlayerScoreboardProps = {
@@ -11,14 +12,14 @@ const PlayerScoreboard = ({ scores, activePlayer, gameOver, winningScore, wins }
     return (
         <div className="scoreboard">
             {scores.map((score, index) => (
-                <div
-                    key={index}
-                    className={`player ${activePlayer === index ? 'active' : ''}`}
-                >
-                    Player {index + 1}: {score}{' '}
-                    {gameOver && score >= winningScore && '(Winner!)'}
-                    <div>Wins: {wins[index]}</div>
-                </div>
+                <Player key={index}
+                    score={score}
+                    activePlayer={activePlayer}
+                    gameOver={gameOver}
+                    winningScore={winningScore}
+                    winsNum={wins[index]}
+                    index={index}
+                />
             ))}
         </div>
     );

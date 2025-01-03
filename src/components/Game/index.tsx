@@ -29,10 +29,10 @@ const Game = () => {
     const { theme, toggleTheme } = useThemeContext();
 
     const initNewGame = () => {
-        setScores([0, 0]);
+        setScores(initPlayers(playersSize));
         setCurrentScore(0);
         setActivePlayer(0);
-        setDiceValues([1, 1]);
+        setDiceValues(initDiceValues(dicesSize));
         setGameOver(false);
         setIsRolling(false);
     };

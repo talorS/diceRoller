@@ -1,0 +1,21 @@
+.hold-button,
+.new-game-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.hold-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.hold-button:hover:not(:disabled),
+.new-game-button:hover {
+    background-color: #0056b3;
+}

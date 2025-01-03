@@ -6,9 +6,12 @@ import './RollDice.css';
 
 const rollDuration = 1000;
 const intervalDuration = 100;
+const dicesSize = 2;
+
+const initializeDiceValues = (size: number) => Array(size).fill(1);
 
 const DiceRoller = () => {
-    const [diceValues, setDiceValues] = useState<number[]>([1, 1]);
+    const [diceValues, setDiceValues] = useState<number[]>(() => initializeDiceValues(dicesSize));
     const [isRolling, setIsRolling] = useState<boolean>(false);
 
     const rollDice = () => {

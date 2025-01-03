@@ -4,7 +4,7 @@ type PlayerProps = {
     winsNum: number;
     currPlayer: number
 }
-const Player = ({ score, activePlayer, winsNum, currPlayer }: PlayerProps) => {
+const PlayerCard = ({ score, activePlayer, winsNum, currPlayer }: PlayerProps) => {
     return (
         <div
             className={`player ${activePlayer === currPlayer ? 'active' : ''}`}
@@ -16,4 +16,4 @@ const Player = ({ score, activePlayer, winsNum, currPlayer }: PlayerProps) => {
     );
 };
 
-export default Player;
+export default PlayerCard;

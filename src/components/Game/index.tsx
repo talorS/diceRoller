@@ -10,7 +10,6 @@ import React from "react";
 const Game = () => {
     const gameState = useGameState();
 
-
     return (
         <div className='game'>
             <PlayerScoreboard

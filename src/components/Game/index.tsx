@@ -5,7 +5,6 @@ import GameOverDisplay from "./GameOverDisplay";
 import "./Game.css";
 import { useGameState } from "../../customHooks/useGameState";
 import NotificationDisplay from "./Notification";
-import React from "react";
 
 const Game = () => {
     const gameState = useGameState();

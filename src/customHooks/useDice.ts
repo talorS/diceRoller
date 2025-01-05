@@ -28,7 +28,6 @@ export const useDice = () => {
         setTimeout(() => {
             clearInterval(interval);
             const finalDiceValues = Array.from({ length: DICES_SIZE }, randomDiceValue);
-            console.log(finalDiceValues)
             setDiceValues(finalDiceValues);
             setIsRolling(false);
 
